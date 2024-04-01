@@ -1,0 +1,73 @@
+<main>
+  <nav>
+    <div class="nav_left">
+      <span
+        class="trigger"
+        nz-icon
+        [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+        (click)="isCollapsed = !isCollapsed"
+      ></span>
+      <h1>Welcome, DIVINE CARRY</h1>
+    </div>
+    <div class="nav_right">
+      <nz-badge nzDot [nzShowDot]="true"
+        ><span nz-icon nzType="notification"></span
+      ></nz-badge>
+      <nz-divider nzType="vertical"></nz-divider>
+      <button
+        nz-button
+        nzNoAnimation
+        nz-dropdown
+        [nzDropdownMenu]="menu"
+        nzPlacement="bottomRight"
+      >
+        <p>
+          <nz-avatar
+            nzIcon="user"
+            style="background-color: #fff; color: #000"
+          ></nz-avatar
+          >Admin
+        </p>
+      </button>
+      <!-- //// -->
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu>
+          <li nz-menu-item>Profile</li>
+          <li nz-menu-item>Logout</li>
+        </ul>
+      </nz-dropdown-menu>
+    </div>
+  </nav>
+  <nz-layout>
+    <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+      <ul nz-menu nzMode="inline">
+        <li nz-menu-item nzSelected routerLink="">
+          <span nz-icon nzType="file"></span>
+          <span>Dashboard</span>
+        </li>
+        <li nz-menu-item routerLink="category">
+          <span nz-icon nzType="file"></span>
+          <span>Category</span>
+        </li>
+        <li nz-submenu nzTitle="User" nzIcon="user">
+          <ul>
+            <li nz-menu-item>Tom</li>
+            <li nz-menu-item>Bill</li>
+            <li nz-menu-item>Alex</li>
+          </ul>
+        </li>
+        <li nz-submenu nzTitle="Team" nzIcon="team">
+          <ul>
+            <li nz-menu-item>Team 1</li>
+            <li nz-menu-item>Team 2</li>
+          </ul>
+        </li>
+      </ul>
+    </nz-sider>
+    <nz-layout>
+      <nz-content>
+        <div class="inner-content"><router-outlet></router-outlet></div>
+      </nz-content>
+    </nz-layout>
+  </nz-layout>
+</main>

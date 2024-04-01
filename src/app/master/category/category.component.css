@@ -1,0 +1,105 @@
+.ant-page-header {
+  padding: 0;
+}
+.ant-page-header-heading-title {
+  font-size: 26px;
+}
+.ant-tag-blue {
+  color: var(--primary-color);
+  background: var(--primary-light);
+  border-color: var(--border-dark);
+}
+.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
+  border-color: var(--primary-color);
+}
+.ant-input-affix-wrapper:focus,
+.ant-input-affix-wrapper-focused {
+  box-shadow: none;
+  border-color: var(--primary-color);
+}
+.ant-btn {
+  color: #fff;
+  border-color: var(--primary-color);
+  background: var(--primary-color);
+}
+.ant-btn:hover,
+.ant-btn:focus {
+  color: #fff;
+  background: #000000b8;
+  border-color: #000000b8;
+}
+.edit_icon {
+  color: #1890ff;
+  cursor: pointer;
+}
+.dlt_icon {
+  color: #dc071b;
+  cursor: pointer;
+}
+::ng-deep.ant-table-thead > tr > th {
+  padding: 10px 14px;
+}
+::ng-deep.ant-table-tbody > tr > td {
+  padding: 8px 14px;
+}
+::ng-deep.ant-table-pagination.ant-pagination {
+  margin: 16px 0 0 0;
+}
+::ng-deep.ant-pagination-item-active {
+  border-color: var(--primary-color);
+}
+::ng-deep.ant-pagination-item-active a {
+  color: var(--primary-color);
+}
+::ng-deep.ant-pagination-item:hover {
+  border-color: var(--primary-color);
+}
+::ng-deep.ant-pagination-item a:hover {
+  color: var(--primary-color);
+}
+::ng-deep.ant-pagination-prev:hover .ant-pagination-item-link,
+::ng-deep.ant-pagination-next:hover .ant-pagination-item-link {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+.add_item_section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+/* ----------------add_section-------------------- */
+
+.add_section ::ng-deep.ant-card-body {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  padding: 24px 24px 6px 24px;
+}
+.add_section ::ng-deep.ant-card-body::before {
+  display: none;
+}
+.add_section_inputs {
+  flex: 0 1 calc(100% - 215px);
+}
+.add_section ::-webkit-scrollbar {
+  display: none;
+}
+.ant-upload-picture-card-wrapper {
+  display: flex;
+  width: 100%;
+}
+.add_section ::ng-deep.ant-upload-list-picture-card-container {
+  display: inline-block;
+  width: 76px;
+  height: 76px;
+  margin: 0 8px 8px 0;
+  border-radius: 0.2rem;
+  overflow: hidden;
+  vertical-align: top;
+}
+.add_section ::ng-deep.ant-upload.ant-upload-select-picture-card {
+  width: 76px;
+  height: 76px;
+}

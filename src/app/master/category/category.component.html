@@ -1,0 +1,220 @@
+<section>
+  <input type="file" (change)="onFileChanged($event)" />
+  <button (click)="onUpload()">Upload File</button>
+  <nz-page-header>
+    <nz-page-header-title>CATEGORY </nz-page-header-title>
+    <nz-page-header-tags>
+      <nz-tag nzColor="blue">01</nz-tag>
+    </nz-page-header-tags>
+    <nz-page-header-extra>
+      <nz-space>
+        <nz-input-group *nzSpaceItem [nzSuffix]="suffixIconSearch">
+          <input type="text" nz-input placeholder="Search" />
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+          <span nz-icon nzType="search"></span>
+        </ng-template>
+        <button *nzSpaceItem nz-button (click)="addItemSection()">
+          Add Category
+        </button>
+      </nz-space>
+    </nz-page-header-extra>
+    <!-- -----------Add Items------------- -->
+    <nz-page-header-content>
+      <form [formGroup]="formData" (ngSubmit)="addItem()">
+        <nz-card class="add_section">
+          <div class="clearfix">
+            <nz-upload
+              class="avatar-uploader"
+             
+              nzName="avatar"
+              nzListType="picture-card"
+              [nzShowUploadList]="false"
+              (nzChange)="handleChange($event)"
+            >
+              <ng-container *ngIf="!avatarUrl">
+                <span
+                  class="upload-icon"
+                  nz-icon
+                  [nzType]="loading ? 'loading' : 'plus'"
+                ></span>
+                <div class="ant-upload-text">Upload</div>
+              </ng-container>
+              <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
+            </nz-upload>
+          </div>
+          <input
+            class="add_section_inputs"
+            nz-input
+            placeholder="Category name"
+            type="text"
+            formControlName="name"
+          />
+
+          <button nz-button style="width: 100px">Save</button>
+        </nz-card>
+      </form>
+    </nz-page-header-content>
+    <!-- -----------View Items------------- -->
+    <nz-page-header-content>
+      <nz-table
+        #editRowTable
+        nzBordered=""
+        [nzData]="listOfData"
+        [nzPageSize]="11"
+        [nzPageIndex]="1"
+      >
+        <thead>
+          <tr>
+            <th nzWidth="85%">Category List</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- /////////  -->
+          <tr *ngIf="activeAddItem">
+            <td>
+              <form [formGroup]="formData">
+                <div class="add_item_section">
+                  <div>
+                    <nz-upload
+                      [nzBeforeUpload]="beforeUpload"
+                      *ngIf="formData.get('img')?.invalid === true"
+                    >
+                      <button nz-button class="custom_upload">
+                        <nz-spin
+                          *ngIf="fileUploadedSpinner"
+                          nzSimple
+                          [nzSize]="'small'"
+                        ></nz-spin>
+                        <span
+                          nz-icon
+                          *ngIf="!fileUploadedSpinner"
+                          nzType="upload"
+                        ></span>
+                        <span>Select File</span>
+                      </button>
+                    </nz-upload>
+                    <nz-avatar
+                      *ngIf="formData.get('img')?.invalid === false"
+                      [nzShape]="'square'"
+                      [nzSize]="'large'"
+                      [nzSrc]="this.formData.get('img')?.value"
+                    ></nz-avatar>
+                  </div>
+
+                  <input
+                    type="text"
+                    formControlName="name"
+                    nz-input
+                    placeholder="Category name"
+                  />
+                </div>
+              </form>
+            </td>
+            <td>
+              <div
+                nz-space
+                nzAlign="center"
+                [nzSplit]="spaceSplit"
+                class="space-align-block"
+              >
+                <ng-template #spaceSplit>
+                  <nz-divider nzType="vertical"></nz-divider>
+                </ng-template>
+                <a *nzSpaceItem (click)="addItem()" class="edit_icon">Save</a>
+                <a *nzSpaceItem (click)="cancelAddItem()" class="dlt_icon"
+                  >Cancel</a
+                >
+              </div>
+            </td>
+          </tr>
+          <!-- ///////// -->
+          <tr *ngFor="let data of editRowTable.data">
+            <ng-container
+              *ngIf="!editCache[data?.categoryId]?.edit; else editTemplate"
+            >
+              <td>
+                <div
+                  nz-space
+                  [nzSize]="'middle'"
+                  nzAlign="center"
+                  class="space-align-block"
+                >
+                  <nz-avatar
+                    *nzSpaceItem
+                    [nzShape]="'square'"
+                    [nzSize]="'large'"
+                    nzSrc="assets\img\test.jpg"
+                  ></nz-avatar>
+                  <span *nzSpaceItem>{{ data?.categoryName }}</span>
+                </div>
+              </td>
+              <td>
+                <div
+                  nz-space
+                  nzAlign="center"
+                  [nzSplit]="spaceSplit"
+                  class="space-align-block"
+                >
+                  <ng-template #spaceSplit>
+                    <nz-divider nzType="vertical"></nz-divider>
+                  </ng-template>
+                  <span
+                    *nzSpaceItem
+                    nz-icon
+                    nzType="edit"
+                    nzTheme="outline"
+                    class="edit_icon"
+                    (click)="startEdit(data.categoryId)"
+                  ></span>
+                  <span
+                    *nzSpaceItem
+                    nz-icon
+                    nzType="delete"
+                    nzTheme="outline"
+                    class="dlt_icon"
+                  ></span>
+                </div>
+              </td>
+            </ng-container>
+            <!-- ///////// -->
+            <ng-template #editTemplate>
+              <td>
+                <input
+                  type="text"
+                  nz-input
+                  [(ngModel)]="editCache[data.categoryId].data.name"
+                />
+              </td>
+              <td>
+                <div
+                  nz-space
+                  nzAlign="center"
+                  [nzSplit]="spaceSplit"
+                  class="space-align-block"
+                >
+                  <ng-template #spaceSplit>
+                    <nz-divider nzType="vertical"></nz-divider>
+                  </ng-template>
+                  <a
+                    *nzSpaceItem
+                    (click)="saveEdit(data.categoryId)"
+                    class="edit_icon"
+                    >Save</a
+                  >
+                  <a
+                    *nzSpaceItem
+                    (click)="cancelEdit(data.categoryId)"
+                    class="dlt_icon"
+                    >Cancel</a
+                  >
+                </div>
+              </td>
+            </ng-template>
+          </tr>
+        </tbody>
+      </nz-table>
+    </nz-page-header-content>
+  </nz-page-header>
+</section>

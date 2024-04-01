@@ -1,0 +1,114 @@
+main {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+nav {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 4px 12px 0px;
+  z-index: 1;
+  padding: 0px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--primary-color);
+  color: #fff;
+  height: 10vh;
+}
+.nav_left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.nav_left h1 {
+  font-size: 26px;
+  color: #fff;
+}
+.trigger {
+  font-size: 24px;
+  cursor: pointer;
+  margin-top: 2px;
+}
+.nav_right {
+  display: flex;
+  align-items: center;
+}
+.ant-divider-vertical {
+  height: 1rem;
+  border-left: 1px solid #ffffffa1;
+  margin: 0 15px;
+}
+.nav_right p {
+  font-size: 16px;
+  gap: 6px;
+  display: flex;
+  align-items: center;
+}
+.nav_right span {
+  color: #fff;
+}
+::ng-deep.ant-badge-dot {
+  box-shadow: none;
+  width: 8px;
+  height: 8px;
+}
+.ant-badge {
+  font-size: 20px;
+  margin: 0 0 3px 0;
+}
+.nav_right button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  color: #fff;
+}
+/* /////////////////////////////////// */
+.ant-layout.ant-layout-has-sider {
+  flex-direction: row;
+  height: 90vh;
+}
+.ant-layout-sider {
+  background: #fff;
+}
+.ant-menu-inline,
+.ant-menu-vertical,
+.ant-menu-vertical-left {
+  padding: 10px 0;
+}
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: #00000015;
+}
+.ant-menu-item-selected {
+  color: var(--primary-color);
+}
+.ant-menu-vertical .ant-menu-item::after,
+.ant-menu-vertical-left .ant-menu-item::after,
+.ant-menu-vertical-right .ant-menu-item::after,
+.ant-menu-inline .ant-menu-item::after {
+  border-right: 4px solid var(--primary-color);
+}
+::ng-deep.ant-menu-light .ant-menu-item:hover,
+::ng-deep.ant-menu-light .ant-menu-item-active,
+::ng-deep.ant-menu-light .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open,
+::ng-deep.ant-menu-light .ant-menu-submenu-active,
+::ng-deep.ant-menu-light .ant-menu-submenu-title:hover {
+  color: #000;
+  font-weight: 600;
+}
+/* ////// */
+.ant-layout.ant-layout-has-sider > .ant-layout,
+.ant-layout.ant-layout-has-sider > .ant-layout-content {
+  width: 0;
+  max-height: 90vh;
+  overflow-y: hidden;
+}
+nz-content {
+  padding: 18px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.inner-content {
+  padding: 24px;
+  background: #fff;
+  min-height: 84vh;
+}
